@@ -1,0 +1,36 @@
+[Database]
+[사원/EMPLOYEE] 
+사원코드(PK) : EMP_CODE NUMBER(4) 
+이름 : EMP_NAME, VARCHAR2(20)
+성별 : EMP_GENDER, CHAR(1), ‘F’ or ‘M’
+직급 : EMP_RANK, VARCHAR2(20)
+입사일자 : EMP_HIREDATE, NUMBER(8), 19881031 형식
+부서코드 : DEPT_NO, NUMBER(2), FK DEPARTMENT(DEPT_NO)
+비밀번호 : PASSWORD, VARCHAR2(20), ‘password’로 일괄 설정됨
+관리자 여부 : IS_ADMIN, CHAR(1), ‘T’ or ‘F’
+[부서/DEPARTMENT] 
+부서코드(PK) : DEPTNO, NUMBER(2)
+부서명 : DEPT_NAME, VARCHAR2(20)
+[재고/GOODS]
+상품코드(PK) : GOODS_CODE, NUMBER(4)
+상품명 : GOODS_NAME, VARCHAR2(20)
+상품단가 : GOODS_PRICE, NUMBER(5)
+수량 : GOODS_STOCK, NUMBER(3)
+[구매판매/TRANSACTION] 
+거래번호(PK, Auto Increase) : TRANSACTION_NO, NUMBER(4), INSERT 시 insert into transaction values(transaction_increment.nextval, 1001, 327, 20201009, 'P'); 형식 사용, INSERT 시 에러가 발생해도 시퀀스 수는 증가하므로, 코드가 안정화되기 전까지는 transaction_increment.nextval 대신 하드코딩 바람.
+상품코드 : GOODS_CODE, NUMBER(4), FK GOODS(GOODS_CODE)
+수량 : QUANTITY, NUMBER(3)
+구입일자 : TRANSACTION_DATE, NUMBER(8), 20201123 형식
+구매 판매 플래그 : TRANSACTION_TYPE, CHAR(1), ‘P’(구매) or ‘S’(판매)
+[급여/SALARY] 
+사원코드(PK) : EMP_CODE, NUMBER(4), FK EMPLOYEE(EMP_CODE)
+지급일(PK) : SALARY_DATE, NUMBER(8), 현재 20201015로 일괄 등록 되어있음.
+부서번호 : DEPT_NO, NUMBER(2), FK DEPT(DEPT_NO)
+금액 : SALARY_AMOUNT, NUMBER(8)
+[자산/ASSET] 
+구입번호(PK, Auto Increase) : PURCHASE_NUM, NUMBER(3), INSERT 시  purchase_increment.nextval 사용, , INSERT 시 에러가 발생해도 시퀀스 수는 증가하므로, 코드가 안정화되기 전까지는 purchase_increment.nextval 대신 하드코딩 바람.
+자본금 : CAPITAL, NUMBER(10)
+구입일자 : PURCHASE_DATE, NUMBER(8), 20201123 형식
+상품코드 : GOODS_CODE, NUMBER(4), FK GOODS(GOODS_CODE)
+변경된 상품 가격 : GOODS_CHANGED_PRICE, NUMBER(5) 
+수량 : PURCHASE_AMOUNT, NUMBER(3)
